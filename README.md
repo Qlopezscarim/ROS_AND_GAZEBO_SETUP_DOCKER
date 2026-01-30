@@ -16,3 +16,8 @@ Run the following command: <br>
 ```
 docker build -t ros_humble_sim:latest .
 ```
+Use the Makefile commands to "enter" a docker image<br>
+Then create a ros2 package (Skip this if not the first time setting up and files already exist in repo):
+```
+ros2 pkg create rf_sim --build-type ament_python
+'''
