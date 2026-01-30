@@ -1,0 +1,27 @@
+<sdf version="1.6">
+  <world name="rf_world">
+
+    <model name="emitter">
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="vis">
+          <geometry>
+            <sphere><radius>0.2</radius></sphere>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="observer">
+      <pose>5 0 0 0 0 0</pose>
+      <link name="link">
+        <visual name="vis">
+          <geometry>
+            <sphere><radius>0.2</radius></sphere>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
