@@ -1,36 +1,49 @@
-import rclpy
-from rclpy.node import Node
-from geometry_msgs.msg import Pose, PoseArray
-
-class PosePublisher(Node):
-    def __init__(self):
-        super().__init__('pose_publisher')
-        self.pub = self.create_publisher(PoseArray, '/world/rf_world/pose/info', 10)
-        self.timer = self.create_timer(1.0, self.publish_poses)  # 1 Hz
-
-        # hardcoded positions for emitter and observer
-        self.emitter_pose = Pose()
-        self.emitter_pose.position.x = 0.0
-        self.emitter_pose.position.y = 0.0
-        self.emitter_pose.position.z = 0.0
-
-        self.observer_pose = Pose()
-        self.observer_pose.position.x = 5.0
-        self.observer_pose.position.y = 0.0
-        self.observer_pose.position.z = 0.0
-
-    def publish_poses(self):
-        msg = PoseArray()
-        msg.poses.append(self.emitter_pose)
-        msg.poses.append(self.observer_pose)
-        self.pub.publish(msg)
-        self.get_logger().info("Published PoseArray with emitter and observer positions")
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = PosePublisher()
-    rclpy.spin(node)
-    rclpy.shutdown()
-
-if __name__ == "__main__":
-    main()
+<sdf version="1.6">
+  <world name="rf_world">
+    <model name="emitter">
+      <static>false</static>
+      <pose>0 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="vis">
+          <geometry>
+            <sphere><radius>0.2</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <plugin name="emitter_pose_pub" filename="libignition-gazebo-pose-publisher-system.so">
+        <ros>
+          <namespace>rf_world</namespace>
+          <remapping>pose/info:=emitter/pose</remapping>
+        </ros>
+        <update_frequency>10</update_frequency>
+      </plugin>
+    </model>
+    
+    <model name="observer">
+      <static>false</static>
+      <pose>5 0 3 0 0 0</pose>
+      <link name="link">
+        <visual name="vis">
+          <geometry>
+            <sphere><radius>0.2</radius></sphere>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <plugin name="observer_pose_pub" filename="libignition-gazebo-pose-publisher-system.so">
+        <ros>
+          <namespace>rf_world</namespace>
+          <remapping>pose/info:=observer/pose</remapping>
+        </ros>
+        <update_frequency>10</update_frequency>
+      </plugin>
+    </model>
+  </world>
+</sdf>
