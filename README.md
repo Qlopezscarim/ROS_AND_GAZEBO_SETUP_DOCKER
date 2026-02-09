@@ -29,9 +29,9 @@ ros2 pkg create rf_sim --build-type ament_python
 
 from here only a couple paths need to be of interest: <br>
 (Note for this example rf_sim is out example package name)<br>
-rf_sim/rf_sim/	: holds source code for our nodes
-rf_sim/setup.py	: console_scripts tells colcon what source nodes actually exist and what to build
-rf_sim/worlds	: Contain our gazebo worlds 
+rf_sim/rf_sim/	: holds source code for our nodes<br>
+rf_sim/setup.py	: console_scripts tells colcon what source nodes actually exist and what to build<br>
+rf_sim/worlds	: Contain our gazebo worlds <br>
 
 we can then open up gazebo using a command similar to below:
 ```
