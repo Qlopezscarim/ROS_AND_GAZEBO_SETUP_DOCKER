@@ -26,3 +26,14 @@ Then create a ros2 package (Skip this if not the first time setting up and files
 ```
 ros2 pkg create rf_sim --build-type ament_python
 '''
+
+from here only a couple paths need to be of interest: <br>
+(Note for this example rf_sim is out example package name)<br>
+rf_sim/rf_sim/	: holds source code for our nodes
+rf_sim/setup.py	: console_scripts tells colcon what source nodes actually exist and what to build
+rf_sim/worlds	: Contain our gazebo worlds 
+
+we can then open up gazebo using a command similar to below:
+```
+ros2 launch ros_gz_sim gz_sim.launch.py gz_args:="/root/ros2_ws/rf_sim/worlds/two_points.world"
+'''
