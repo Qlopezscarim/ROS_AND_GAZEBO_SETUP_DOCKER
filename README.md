@@ -36,4 +36,4 @@ rf_sim/worlds	: Contain our gazebo worlds
 we can then open up gazebo using a command similar to below:
 ```
 ros2 launch ros_gz_sim gz_sim.launch.py gz_args:="/root/ros2_ws/rf_sim/worlds/two_points.world"
-'''
+```
